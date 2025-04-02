@@ -5,7 +5,13 @@ import { useState } from "react";
 import Button from "./components/ui/button";
 import Input from "./components/ui/input";
 import Checkbox from "./components/ui/checkbox";
-import { Facebook, Instagram, LinkedinIcon } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  LinkedinIcon,
+  CheckCircle,
+  ExternalLink,
+} from "lucide-react";
 
 const GiveawayLandingPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -62,9 +68,23 @@ const GiveawayLandingPage: React.FC = () => {
     const links = {
       facebook: "https://www.facebook.com/theteddybearclinic",
       instagram: "https://www.instagram.com/teddybearfoundation/",
-      linkedin: "https://www.linkedin.com/company/teddybearfoundation",
+      linkedin: "https://www.linkedin.com/company/teddybearclinic",
     };
     window.open(links[platform], "_blank");
+  };
+
+  // New function to get the current platform post link
+  const getCurrentPlatformPostLink = () => {
+    // Placeholder links - replace with actual post links
+    const postLinks = {
+      facebook: "https://www.facebook.com/theteddybearclinic/posts/12345",
+      instagram: "https://www.instagram.com/p/abcdef/",
+      linkedin:
+        "https://www.linkedin.com/feed/update/urn:li:activity:1234567890",
+      "": "#", // Default if no platform selected
+    };
+
+    return postLinks[formData.socialPlatform as keyof typeof postLinks] || "#";
   };
 
   const socialMediaIcons = {
@@ -73,26 +93,46 @@ const GiveawayLandingPage: React.FC = () => {
     linkedin: <LinkedinIcon color="#000000" />,
   };
 
+  // Partner website links
+  const partnerLinks = {
+    frozen: "https://frozenforyou.co.za/",
+    tbf: "https://teddybearfoundation.org.za/",
+    mdluli: "https://www.mdlulisafarilodge.co.za/",
+  };
+
+  // UPDATED: Bonus entry options with action links
   const bonusEntryOptions = [
     {
       name: "repostedStory",
-      label: "Reposted Giveaway Story",
-      points: 1,
+      label: "Repost Giveaway Story",
+      points: 2,
+      action: "Repost",
+      // REPLACE THIS LINK: This should be the link to the story that needs to be reposted
+      link: "https://www.instagram.com/p/giveaway-story-placeholder/",
     },
     {
       name: "taggedFriends",
-      label: "Tagged 3 Friends",
+      label: "Tag 3 Friends in Comments",
       points: 2,
+      action: "Comment",
+      // REPLACE THIS LINK: This should be the link to the post where users should tag friends
+      link: "https://www.instagram.com/p/tag-friends-post-placeholder/",
     },
     {
       name: "followedMdluli",
-      label: "Followed Mdluli Lodge",
+      label: "Follow Mdluli Safari Lodge",
       points: 1,
+      action: "Follow",
+      // This link is already set correctly from partnerLinks
+      link: partnerLinks.mdluli,
     },
     {
       name: "followedFrozen",
-      label: "Followed Frozen for You",
+      label: "Follow Frozen For You",
       points: 1,
+      action: "Follow",
+      // This link is already set correctly from partnerLinks
+      link: partnerLinks.frozen,
     },
   ];
 
@@ -104,25 +144,58 @@ const GiveawayLandingPage: React.FC = () => {
           <p></p>
         </div>
 
-        {/* Header remains the same */}
+        {/* Updated Header with new copy */}
         <div className="giveaway-header">
           <h1>Teddy Bear Foundation Giveaway</h1>
-          <p>Enter for a chance to win and support a great cause</p>
+          <div className="header-message">
+            <p>
+              Where giving back meets extraordinary rewards, your R50 entry
+              helps fund essential services that provide safety, healing, and
+              hope for children in need. Together, we can work towards a South
+              Africa free from child abuse.
+            </p>
+          </div>
         </div>
 
         <form className="giveaway-form" onSubmit={handleSubmit}>
-          {/* Logo Container */}
+          {/* Logo Container with updated structure */}
           <div className="logo-container">
-            <img
-              src="/images/partners/tbf-logo.svg"
-              alt="Teddy Bear Foundation Logo"
-              className="logo"
-            />
-            <img
-              src="/images/partners/frozenforyou-logo.svg"
-              alt="Frozen For You Logo"
-              className="logo"
-            />
+            <a
+              href={partnerLinks.mdluli}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo-link"
+            >
+              <img
+                src="/images/partners/mdluli.svg"
+                alt="Mdluli Safari Lodge Logo"
+                className="logo"
+              />
+            </a>
+            <a
+              href={partnerLinks.tbf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo-link"
+            >
+              <img
+                src="/images/partners/tbf-logo.svg"
+                alt="Teddy Bear Foundation Logo"
+                className="logo"
+              />
+            </a>
+            <a
+              href={partnerLinks.frozen}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo-link"
+            >
+              <img
+                src="/images/partners/frozenforyou-logo.svg"
+                alt="Frozen For You Logo"
+                className="logo"
+              />
+            </a>
           </div>
 
           {/* Personal Details Section */}
@@ -196,50 +269,140 @@ const GiveawayLandingPage: React.FC = () => {
           {/* Social Media Requirements */}
           <div className="form-section">
             <h2 className="form-section-title">Social Media Requirements</h2>
-            <div className="social-requirements">
-              <div className="requirement-item">
-                <Checkbox
-                  label="1. Follow the Teddy Bear Foundation"
-                  name="followedTeddy"
-                  checked={formData.followedTeddy}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="requirement-item">
-                <Checkbox
-                  label="2. Like our Post"
-                  name="likedPost"
-                  checked={formData.likedPost}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="social-buttons">
-              {Object.keys(socialMediaIcons).map((platform) => (
-                <Button
-                  key={platform}
-                  variant="primary"
-                  size="sm"
-                  onClick={() =>
-                    openSocialLink(platform as keyof typeof socialMediaIcons)
-                  }
-                  className="social-btn"
+
+            {formData.socialPlatform ? (
+              <div className="social-requirements">
+                {/* Requirement 1: Follow Teddy Bear Foundation - Simplified */}
+                <div
+                  className={`social-action-container ${
+                    formData.followedTeddy ? "active" : ""
+                  }`}
                 >
-                  {socialMediaIcons[platform as keyof typeof socialMediaIcons]}
-                  {platform.charAt(0).toUpperCase() + platform.slice(1)}
-                </Button>
-              ))}
-            </div>
+                  <div className="social-action-label">
+                    <span className="platform-icon">
+                      {
+                        socialMediaIcons[
+                          formData.socialPlatform as keyof typeof socialMediaIcons
+                        ]
+                      }
+                    </span>
+                    <span>Follow Teddy Bear Foundation</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      openSocialLink(
+                        formData.socialPlatform as keyof typeof socialMediaIcons
+                      )
+                    }
+                    className={`social-action-button ${
+                      formData.followedTeddy ? "completed" : ""
+                    }`}
+                  >
+                    {formData.followedTeddy ? (
+                      <>
+                        <CheckCircle size={18} />
+                        <span>Followed</span>
+                      </>
+                    ) : (
+                      <>
+                        {
+                          socialMediaIcons[
+                            formData.socialPlatform as keyof typeof socialMediaIcons
+                          ]
+                        }
+                        <span>Follow on {formData.socialPlatform}</span>
+                      </>
+                    )}
+                  </button>
+
+                  <div className="checkbox-group mt-2">
+                    <Checkbox
+                      label="I confirm I followed Teddy Bear Foundation"
+                      name="followedTeddy"
+                      checked={formData.followedTeddy}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Requirement 2: Like our post - Simplified */}
+                <div
+                  className={`social-action-container ${
+                    formData.likedPost ? "active" : ""
+                  }`}
+                >
+                  <div className="social-action-label">
+                    <span className="platform-icon">
+                      {
+                        socialMediaIcons[
+                          formData.socialPlatform as keyof typeof socialMediaIcons
+                        ]
+                      }
+                    </span>
+                    <span>Like our post</span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() =>
+                      window.open(getCurrentPlatformPostLink(), "_blank")
+                    }
+                    className={`social-action-button ${
+                      formData.likedPost ? "completed" : ""
+                    }`}
+                  >
+                    {formData.likedPost ? (
+                      <>
+                        <CheckCircle size={18} />
+                        <span>Liked</span>
+                      </>
+                    ) : (
+                      <>
+                        {
+                          socialMediaIcons[
+                            formData.socialPlatform as keyof typeof socialMediaIcons
+                          ]
+                        }
+                        <span>View Post</span>
+                      </>
+                    )}
+                  </button>
+
+                  <div className="checkbox-group mt-2">
+                    <Checkbox
+                      label="I confirm I liked the post"
+                      name="likedPost"
+                      checked={formData.likedPost}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="social-platform-prompt">
+                <p>
+                  Please select a social media platform in the Personal Details
+                  section first.
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* Donation Section */}
+          {/* Support & Entries section */}
           <div className="form-section donation-section">
             <h2 className="form-section-title">Support & Entries</h2>
-            <p className="donation-section-description">
-              A minimum donation of R50,00 is required to complete your entry
-            </p>
+
+            <div className="donation-instructions">
+              <p>
+                Every R50 donation gives you 1 entry, plus a bonus entry for
+                every 2 entries purchased.
+              </p>
+            </div>
+
             <div className="donation-control">
               <div className="donation-controls-wrapper">
                 <Button
@@ -274,19 +437,7 @@ const GiveawayLandingPage: React.FC = () => {
                 {calculateEntries(formData.donationAmount)} Entries
               </div>
             </div>
-            <p className="donation-tiers">
-              <span>R50: 1 entry</span>
-              <span>R100: 3 entries (1 free!)</span>
-              <span>R150: 4 entries</span>
-              <span>R200: 6 entries (2 free!)</span>
-              <span>R250: 7 entries</span>
-            </p>
-            <div className="donation-explanation">
-              <p>For every 2 entries you purchase, you get a 3rd entry free!</p>
-              <p>
-                Example: R100 = 2 paid entries + 1 free entry = 3 total entries
-              </p>
-            </div>
+
             <div className="pay-now-container">
               <Button
                 variant="primary"
@@ -301,7 +452,7 @@ const GiveawayLandingPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Bonus Entries Section */}
+          {/* UPDATED: Bonus Entries Section with row format and action buttons */}
           <div className="form-section bonus-entries">
             <h2 className="form-section-title">Bonus Entries</h2>
             <div className="bonus-entries-grid">
@@ -321,8 +472,25 @@ const GiveawayLandingPage: React.FC = () => {
                     }))
                   }
                 >
-                  {option.label}
-                  <span className="bonus-points">+{option.points} entry</span>
+                  <div className="bonus-entry-content">
+                    <span className="bonus-entry-label">{option.label}</span>
+                    <span className="bonus-points">
+                      +{option.points}{" "}
+                      {option.points === 1 ? "entry" : "entries"}
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="bonus-action-button"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent triggering the parent div's onClick
+                      window.open(option.link, "_blank");
+                    }}
+                  >
+                    <ExternalLink size={16} />
+                    <span>{option.action}</span>
+                  </button>
                 </div>
               ))}
             </div>
