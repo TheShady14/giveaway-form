@@ -1,8 +1,11 @@
+// tsconfig.node.json
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  }
+    "composite": true, // Add this line
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["vite.config.js"]
 }
