@@ -1,0 +1,795 @@
+/* Base styles */
+:root {
+  --color-primary: #f85baa;
+  --color-primary-rgb: 248, 91, 170;
+  --color-secondary: #5bc6fb;
+  --color-secondary-rgb: 91, 198, 251;
+  --color-accent: #fb077d;
+  --color-green-highlight: #4caf50;
+  --color-green-highlight-rgb: 76, 175, 80;
+  --color-background: #ffffff;
+  --color-text: #333333;
+  --color-text-light: #666666;
+  --color-border: #e0e0e0;
+  --color-header: #fb077d;
+  --color-footer: #30c2dc;
+
+  /* Typography */
+  --font-primary: "Poppins", sans-serif;
+  --font-secondary: "Montserrat", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-full: 9999px;
+}
+
+body {
+  /* BACKGROUND ZOOM CONTROL - Adjust the scale value below to zoom in/out the background */
+  /* A value less than 1 (e.g., 0.95) zooms out, showing more of the background */
+  /* A value greater than 1 (e.g., 1.05) zooms in, showing less of the background */
+  /* This doesn't affect the size of any components, only the background image */
+  background-image: url("/images/background/background.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  line-height: 1.5;
+  overflow-x: hidden;
+  transform: scale(0.9); /* BACKGROUND ZOOM: Change this value to adjust zoom */
+  transform-origin: center center;
+}
+
+/* Main container */
+.giveaway-container {
+  width: 100%;
+  max-width: 800px;
+  margin: var(--spacing-xl) auto;
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* Header styling */
+.giveaway-header {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  color: white;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.giveaway-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("/images/pattern.svg");
+  background-size: cover;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.giveaway-header h1 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 700;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.giveaway-header p {
+  font-size: var(--font-size-md);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Styling for the new header message */
+.giveaway-header .header-message {
+  margin-top: var(--spacing-lg);
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.giveaway-header .header-message p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* Form styling */
+.giveaway-form {
+  padding: var(--spacing-xl);
+}
+
+.form-section {
+  margin-bottom: var(--spacing-2xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.form-section-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-primary);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 2px solid var(--color-primary);
+  display: inline-block;
+}
+
+/* Form grid layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+/* Social media platform selection */
+.social-platform-select {
+  grid-column: span 2;
+}
+
+.social-platform-select label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.social-platform-icons {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xs);
+}
+
+.social-platform-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.social-platform-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.social-platform-icon.selected {
+  background-color: rgba(var(--color-primary-rgb), 0.2);
+  border: 2px solid var(--color-primary);
+}
+
+/* Social buttons */
+.social-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* New green success style for social buttons */
+.social-btn-success {
+  background-color: rgba(var(--color-green-highlight-rgb), 0.2);
+  border-color: var(--color-green-highlight);
+  color: var(--color-green-highlight);
+}
+
+/* Post link button styling */
+.post-link-btn {
+  margin-left: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+/* CHANGE 2: Improved Support & Entries section styling */
+.donation-section {
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-xl);
+  min-height: 350px; /* Set a minimum height to prevent layout shifts */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.donation-section-description {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  max-width: 500px;
+}
+
+.donation-instructions {
+  background-color: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.donation-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  width: 100%;
+  max-width: 400px;
+}
+
+.donation-controls-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  width: 100%;
+  max-width: 300px;
+}
+
+.donation-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.currency-prefix {
+  position: absolute;
+  left: var(--spacing-sm);
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.donation-input-wrapper input {
+  padding-left: var(--spacing-lg);
+  text-align: center;
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+.donation-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.entries-display {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  margin-top: var(--spacing-sm);
+}
+
+.donation-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+}
+
+.donation-tiers span {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+}
+
+/* Bonus entries section - Improved as requested */
+.bonus-entries {
+  margin-top: var(--spacing-xl);
+}
+
+/* Changed from grid to flex column for rows */
+.bonus-entries-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Updated box to be a row with space for button */
+.bonus-entry-box {
+  background-color: rgba(var(--color-primary-rgb), 0.08);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between text and button */
+}
+
+.bonus-entry-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px; /* Changed from top border to left border */
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bonus-entry-box:hover {
+  background-color: rgba(var(--color-primary-rgb), 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.bonus-entry-box:hover::before {
+  opacity: 1;
+}
+
+.bonus-entry-box.selected {
+  border-color: var(--color-green-highlight);
+  background-color: rgba(var(--color-green-highlight-rgb), 0.1);
+}
+
+.bonus-entry-box.selected::before {
+  background: var(--color-green-highlight);
+  opacity: 1;
+}
+
+/* New content wrapper for the left side text */
+.bonus-entry-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.bonus-entry-label {
+  font-weight: 500;
+  font-size: var(--font-size-md);
+}
+
+.bonus-points {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  transition: all 0.3s ease;
+  margin-left: var(--spacing-sm);
+}
+
+.bonus-entry-box.selected .bonus-points {
+  color: var(--color-green-highlight);
+  background-color: rgba(var(--color-green-highlight-rgb), 0.1);
+}
+
+/* New button styling for the action button */
+.bonus-action-button {
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  white-space: nowrap;
+}
+
+.bonus-action-button:hover {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.bonus-entry-box.selected .bonus-action-button {
+  background-color: var(--color-green-highlight);
+  color: white;
+  border-color: var(--color-green-highlight);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bonus-entry-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .bonus-entry-content {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .bonus-action-button {
+    margin-top: var(--spacing-sm);
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Terms section */
+.terms-section {
+  margin-top: var(--spacing-xl);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+}
+
+/* Submit section */
+.submit-section {
+  margin-top: var(--spacing-xl);
+  text-align: center;
+}
+
+.submit-section button {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  border: none;
+  color: white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-section button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .giveaway-container {
+    width: 95%;
+    margin: var(--spacing-md) auto;
+    max-width: 100%;
+  }
+
+  .giveaway-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .giveaway-form {
+    padding: var(--spacing-md);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .social-platform-select {
+    grid-column: span 1;
+  }
+
+  .social-platform-icons {
+    justify-content: center;
+  }
+
+  .social-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .donation-controls-wrapper {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .donation-input-wrapper {
+    width: 100%;
+  }
+
+  .donation-tiers {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bonus-entries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bonus-entry-box {
+    min-height: 100px;
+  }
+}
+
+/* Animation utilities */
+.transition {
+  transition: all 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* New styles for the updated requirements */
+
+/* CHANGE 1: Improved Social Media Requirements styling */
+.social-requirements {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl); /* Increased spacing between requirements */
+}
+
+.social-platform-prompt {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+}
+
+.social-action-container {
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg); /* Increased padding */
+  margin-top: var(--spacing-sm);
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.social-action-container.active {
+  background-color: rgba(var(--color-green-highlight-rgb), 0.05);
+  border-left: 4px solid var(--color-green-highlight);
+}
+
+.social-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content */
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg); /* Increased padding */
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-top: var(--spacing-md); /* Increased margin */
+  width: 100%; /* Full width button */
+  max-width: 300px; /* Maximum width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.social-action-button:hover {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.social-action-button.completed {
+  background-color: var(--color-green-highlight);
+  color: white;
+  border-color: var(--color-green-highlight);
+}
+
+.social-action-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-action-label {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-lg); /* Larger font size */
+  margin-bottom: var(--spacing-md); /* Added margin */
+}
+
+.social-action-label .platform-icon {
+  width: 28px; /* Larger icon */
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-group.mt-2 {
+  margin-top: var(--spacing-md); /* Increased margin */
+  justify-content: center; /* Center checkbox */
+}
+
+/* Donation explanation styles */
+.donation-explanation {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: rgba(var(--color-green-highlight-rgb), 0.1);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.donation-explanation p {
+  margin: var(--spacing-xs) 0;
+  color: var(--color-text);
+}
+
+/* Pay now button styles */
+.pay-now-container {
+  margin-top: var(--spacing-lg);
+  text-align: center;
+}
+
+.pay-now-btn {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-secondary)
+  );
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pay-now-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* New styles for header, footer and logos */
+.page-header {
+  width: 100%;
+  background-color: var(--color-header);
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  color: white;
+}
+
+.page-footer {
+  width: 100%;
+  background-color: var(--color-footer);
+  padding: var(--spacing-md) 0;
+  text-align: center;
+  color: white;
+  font-size: var(--font-size-sm);
+}
+
+/* Logo container styles */
+.logo-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: var(--spacing-md);
+  background-color: white;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo-link {
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+/* LOGO SIZE ADJUSTMENT - You can modify the height value below to make logos bigger or smaller */
+.logo {
+  height: 140px; /* Increased from 100px to 140px - ADJUST THIS VALUE to change logo size */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Wrapper for the entire giveaway page */
+.giveaway-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+@media (max-width: 576px) {
+  .logo-container {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  /* MOBILE LOGO SIZE ADJUSTMENT - You can modify this value for mobile screens */
+  .logo {
+    height: 100px; /* Increased from 70px to 100px - ADJUST THIS VALUE to change mobile logo size */
+  }
+}
