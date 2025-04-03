@@ -793,3 +793,449 @@ body {
     height: 100px; /* Increased from 70px to 100px - ADJUST THIS VALUE to change mobile logo size */
   }
 }
+
+/* Form success message */
+.form-success-message {
+  background-color: rgba(var(--color-green-highlight-rgb), 0.1);
+  border-left: 4px solid var(--color-green-highlight);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.form-success-message h2 {
+  color: var(--color-green-highlight);
+  margin-bottom: var(--spacing-md);
+}
+
+.form-success-message p {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Error message */
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid #ff0000;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--radius-md);
+  color: #ff0000;
+}
+
+/* Payment note */
+.payment-note {
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  font-style: italic;
+  text-align: center;
+}
+
+/* Disabled state for inputs */
+input:disabled,
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Form completion message */
+.form-completion-message {
+  background-color: rgba(var(--color-green-highlight-rgb), 0.1);
+  border-left: 4px solid var(--color-green-highlight);
+  padding: var(--spacing-xl);
+  margin: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.completion-icon {
+  width: 80px;
+  height: 80px;
+  background-color: var(--color-green-highlight);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-completion-message h2 {
+  color: var(--color-green-highlight);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-2xl);
+}
+
+.form-completion-message p {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+  max-width: 600px;
+}
+
+.entries-confirmation {
+  font-size: var(--font-size-xl) !important;
+  margin: var(--spacing-lg) 0 !important;
+}
+
+.entries-confirmation span {
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-md);
+}
+
+.completion-actions {
+  margin-top: var(--spacing-xl);
+}
+
+/* Payment step styling */
+.payment-step {
+  animation: fadeIn 0.5s ease;
+}
+
+.payment-focused {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+/* Demo payment button - for testing only */
+.demo-payment-button {
+  margin-top: var(--spacing-md);
+  background: none;
+  border: 1px dashed #999;
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: #666;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.demo-payment-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add these mobile-specific styles to the end of your existing giveaway.css file */
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* General container adjustments */
+  .giveaway-container {
+    width: 100%;
+    margin: var(--spacing-sm) auto;
+    max-width: 100%;
+    border-radius: var(--radius-md);
+  }
+
+  /* Form padding adjustments */
+  .giveaway-form {
+    padding: var(--spacing-md);
+  }
+
+  /* Header adjustments */
+  .giveaway-header {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .giveaway-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .giveaway-header .header-message p {
+    font-size: 1rem;
+  }
+
+  /* Form section spacing */
+  .form-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+  }
+
+  /* Increase input and button sizes for better touch targets */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  .input {
+    height: 50px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 12px;
+  }
+
+  /* Checkbox improvements */
+  .checkbox {
+    width: 24px;
+    height: 24px;
+  }
+
+  .checkbox-label {
+    font-size: 16px;
+  }
+
+  /* Social platform icons */
+  .social-platform-icons {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .social-platform-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* Social action buttons */
+  .social-action-button {
+    padding: 14px 20px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Donation controls */
+  .donation-controls-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .donation-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .donation-input-wrapper input {
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .currency-prefix {
+    font-size: 18px;
+  }
+
+  .entries-display {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+
+  /* Bonus entries */
+  .bonus-entry-box {
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .bonus-entry-label {
+    font-size: 16px;
+  }
+
+  .bonus-action-button {
+    padding: 12px 16px;
+    font-size: 16px;
+    margin-top: var(--spacing-sm);
+  }
+
+  /* Submit button */
+  .submit-section button {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 18px;
+  }
+
+  /* Payment step */
+  .form-success-message {
+    padding: var(--spacing-md);
+    margin: var(--spacing-md) 0;
+  }
+
+  .form-success-message h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-success-message p {
+    font-size: 1rem;
+  }
+
+  .pay-now-btn {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 24px;
+    font-size: 18px;
+  }
+
+  /* Completion message */
+  .form-completion-message {
+    padding: var(--spacing-lg);
+    margin: var(--spacing-md);
+  }
+
+  .completion-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 36px;
+  }
+
+  .form-completion-message h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-completion-message p {
+    font-size: 1rem;
+  }
+
+  .entries-confirmation {
+    font-size: 1.2rem !important;
+  }
+
+  /* Fix for iOS input zoom */
+  @supports (-webkit-touch-callout: none) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .giveaway-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-grid {
+    gap: var(--spacing-md);
+  }
+
+  .social-platform-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .social-action-container {
+    padding: var(--spacing-md);
+  }
+
+  .social-action-label {
+    font-size: var(--font-size-md);
+  }
+
+  .bonus-entry-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bonus-entry-content {
+    width: 100%;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .bonus-action-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Ensure form sections have enough spacing */
+  .form-section {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Make sure the donation section is properly sized */
+  .donation-section {
+    padding: var(--spacing-md);
+  }
+
+  /* Ensure the logo container works on small screens */
+  .logo-container {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .logo {
+    height: 80px;
+  }
+}
+
+/* Fix for sticky mobile keyboard issues */
+@media (max-height: 600px) and (max-width: 768px) {
+  .giveaway-container {
+    margin: 0 auto;
+  }
+
+  body {
+    transform: none;
+  }
+
+  .giveaway-header {
+    padding: var(--spacing-md);
+  }
+
+  .giveaway-header h1 {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .giveaway-header .header-message p {
+    font-size: 0.9rem;
+  }
+
+  .form-section-title {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+/* Ensure buttons are easy to tap */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  .social-platform-icon,
+  .bonus-entry-box,
+  .social-action-button,
+  .bonus-action-button,
+  .donation-btn,
+  .checkbox-label,
+  .pay-now-btn {
+    cursor: default; /* Remove hover cursor on touch devices */
+  }
+
+  /* Add tap highlight color for better feedback */
+  button:active,
+  .social-platform-icon:active,
+  .bonus-entry-box:active,
+  .social-action-button:active,
+  .bonus-action-button:active,
+  .donation-btn:active {
+    opacity: 0.7;
+  }
+
+  /* Increase tap target sizes */
+  .checkbox-label {
+    padding: 8px 0;
+  }
+
+  .checkbox {
+    margin-right: 12px;
+  }
+}

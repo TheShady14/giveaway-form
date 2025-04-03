@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Base styles and CSS variables */
+/* You can keep some of your custom CSS variables here */
 :root {
   /* Colors */
   --color-primary: #3a86ff;
@@ -223,4 +223,42 @@ a:hover {
 
 .hover-scale:hover {
   transform: scale(1.05);
+}
+
+/* Add these styles to the end of your index.css file */
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Adjust root variables for mobile */
+  :root {
+    --spacing-md: 0.875rem;
+    --spacing-lg: 1.25rem;
+    --spacing-xl: 1.75rem;
+    --spacing-2xl: 2.5rem;
+  }
+
+  /* Improve form element styling */
+  .form-label {
+    font-size: 16px;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  /* Ensure buttons have enough space */
+  .btn {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+  }
+}
+
+/* Fix for iOS input zoom */
+@supports (-webkit-touch-callout: none) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }

@@ -8,6 +8,7 @@ import "./index.css";
 import "./App.css";
 import "./styles/components.css";
 import "./styles/giveaway.css";
+import "./styles/admin.css";
 
 import App from "./App.jsx";
 
