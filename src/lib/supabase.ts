@@ -1,9 +1,13 @@
-// src/lib/supabase.ts
 import { createClient } from "@supabase/supabase-js";
 
-// For Vite projects, environment variables need to be prefixed with VITE_
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// For Vite, we need to use import.meta.env
+// These environment variables should be defined in your .env file
+const supabaseUrl =
+  import.meta.env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL || "";
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ||
+  process.env.VITE_SUPABASE_ANON_KEY ||
+  "";
 
 // Create a single supabase client for the browser
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

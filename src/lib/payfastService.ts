@@ -61,7 +61,7 @@ export async function processPayfastNotification(
     await supabase
       .from("payfast_notifications")
       .update({
-        payment_id: payment.id,
+        payment_id: payment?.id || null, // Add null check here
         verified: true,
         processed: true,
       })

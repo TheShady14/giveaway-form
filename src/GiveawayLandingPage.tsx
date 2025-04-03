@@ -38,8 +38,6 @@ const GiveawayLandingPage: React.FC = () => {
   const [entryId, setEntryId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [paymentComplete, setPaymentComplete] = useState(false);
   const [formStep, setFormStep] = useState(1); // 1: Form, 2: Payment, 3: Complete
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +93,6 @@ const GiveawayLandingPage: React.FC = () => {
 
       // Store the entry ID for the payment form
       setEntryId(data?.id || null);
-      setSubmitSuccess(true);
       setFormStep(2); // Move to payment step
 
       // Scroll to the payment section

@@ -86,7 +86,7 @@ const PayFastForm: React.FC<PayFastFormProps> = ({
           opacity: disabled ? 0.7 : 1,
         }}
       >
-        Pay Now with PayFast
+        Donate Now
       </button>
     </form>
   );
