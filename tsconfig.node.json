@@ -1,7 +1,6 @@
-// tsconfig.node.json
 {
   "compilerOptions": {
-    "composite": true, // Add this line
+    "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",

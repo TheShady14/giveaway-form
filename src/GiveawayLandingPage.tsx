@@ -320,11 +320,10 @@ const GiveawayLandingPage: React.FC = () => {
             {formStep === 2 ? (
               <div className="payment-step">
                 <div className="form-success-message">
-                  <h2>One More Step!</h2>
+                  <h2>One More Step</h2>
                   <p>
-                    Your entry has been submitted successfully. To complete your
-                    entry and secure your spot in the giveaway, please make your
-                    payment below.
+                    Complete your entry and secure your spot in the giveaway,
+                    please make your payment below.
                   </p>
                   <p className="entries-confirmation">
                     You will receive{" "}
