@@ -10,10 +10,18 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Define environment variables that should be replaced at build time
+  // Ensure environment variables are properly handled
   define: {
-    // You can add default values here if needed
-    // 'process.env.VITE_SUPABASE_URL': JSON.stringify(process.env.VITE_SUPABASE_URL),
-    // 'process.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(process.env.VITE_SUPABASE_ANON_KEY),
+    "process.env.VITE_SUPABASE_URL": JSON.stringify(
+      process.env.VITE_SUPABASE_URL
+    ),
+    "process.env.VITE_SUPABASE_ANON_KEY": JSON.stringify(
+      process.env.VITE_SUPABASE_ANON_KEY
+    ),
+  },
+  // Configure build output for Netlify
+  build: {
+    outDir: "dist",
+    sourcemap: true,
   },
 });
