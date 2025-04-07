@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "./components/ui/button";
 import Input from "./components/ui/input";
 import Checkbox from "./components/ui/checkbox";
@@ -18,7 +18,9 @@ import {
   calculateEntries as calculateEntryCount,
 } from "./lib/entryService";
 
-const GiveawayLandingPage: React.FC = () => {
+const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
+  initialStep = 1,
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -38,7 +40,22 @@ const GiveawayLandingPage: React.FC = () => {
   const [entryId, setEntryId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [formStep, setFormStep] = useState(1); // 1: Form, 2: Payment, 3: Complete
+  const [formStep, setFormStep] = useState(initialStep); // 1: Form, 2: Payment, 3: Complete
+  const [totalEntries, setTotalEntries] = useState(0);
+
+  // Calculate total entries including bonus entries
+  useEffect(() => {
+    // Base entries from donation
+    let entries = calculateEntryCount(formData.donationAmount);
+
+    // Add bonus entries
+    if (formData.followedMdluli) entries += 1;
+    if (formData.followedFrozen) entries += 1;
+    if (formData.repostedStory) entries += 2;
+    if (formData.taggedFriends) entries += 2;
+
+    setTotalEntries(entries);
+  }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -83,7 +100,7 @@ const GiveawayLandingPage: React.FC = () => {
         followed_mdluli: formData.followedMdluli,
         followed_frozen: formData.followedFrozen,
         accepted_terms: formData.acceptedTerms,
-        entry_count: calculateEntries(formData.donationAmount),
+        entry_count: totalEntries, // Use total entries including bonus entries
         payment_status: "pending",
       });
 
@@ -108,24 +125,26 @@ const GiveawayLandingPage: React.FC = () => {
     }
   };
 
+  // COMMENT: Social media platform links - Update these URLs with the actual Teddy Bear Foundation social media profiles
   const openSocialLink = (platform: "facebook" | "instagram" | "linkedin") => {
-    // COMMENT: Replace these URLs with the actual Teddy Bear Foundation social media profiles
     const links = {
+      // Updated with the correct links provided
       facebook: "https://www.facebook.com/theteddybearclinic",
       instagram: "https://www.instagram.com/teddybearfoundation/",
-      linkedin: "https://www.linkedin.com/company/teddybearclinic",
+      linkedin: "https://www.linkedin.com/company/theteddybearclinic/",
     };
     window.open(links[platform], "_blank");
   };
 
-  // Get the current platform post link
+  // COMMENT: Post links - Update these URLs with the actual post links for each platform
   const getCurrentPlatformPostLink = () => {
-    // COMMENT: Replace these URLs with the actual post links for each platform
+    // Updated with the correct post links provided
     const postLinks = {
-      facebook: "https://www.facebook.com/theteddybearclinic/posts/12345",
-      instagram: "https://www.instagram.com/p/abcdef/",
+      facebook: "https://www.facebook.com/share/p/18b2HxAmHW/",
+      instagram:
+        "https://www.instagram.com/p/DCrBijCsiai/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
       linkedin:
-        "https://www.linkedin.com/feed/update/urn:li:activity:1234567890",
+        "https://www.linkedin.com/posts/theteddybearclinic_the-teddy-bear-foundation-endorses-this-letter-activity-7313195154620706816-8_-4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE_PHBABfm9FconNbVv6IrCXpYuIvwoLJ38",
       "": "#", // Default if no platform selected
     };
 
@@ -138,37 +157,69 @@ const GiveawayLandingPage: React.FC = () => {
     linkedin: <LinkedinIcon color="#000000" />,
   };
 
-  // Partner website links
-  // COMMENT: Verify these URLs are correct for each partner
+  // COMMENT: Partner website links - These are the main website links
   const partnerLinks = {
     frozen: "https://frozenforyou.co.za/",
     tbf: "https://teddybearfoundation.org.za/",
     mdluli: "https://www.mdlulisafarilodge.co.za/",
   };
 
+  // COMMENT: Partner social media links - These are the social media links for each partner
+  const getPartnerSocialLinks = (platform: string) => {
+    // Updated with the correct social media links for each partner based on the selected platform
+    const socialLinks = {
+      facebook: {
+        teddy: "https://www.facebook.com/theteddybearclinic",
+        mdluli: "https://www.facebook.com/MdluliLodge",
+        frozen: "https://www.facebook.com/frozenforyousa",
+      },
+      instagram: {
+        teddy: "https://www.instagram.com/teddybearfoundation/",
+        mdluli: "https://www.instagram.com/mdlulilodge/",
+        frozen: "https://www.instagram.com/frozenforyousa/",
+      },
+      linkedin: {
+        teddy: "https://www.linkedin.com/company/theteddybearclinic/",
+        mdluli: "https://www.linkedin.com/company/mdluli-safari-lodge/",
+        frozen: "https://www.linkedin.com/company/frozen-for-you/",
+      },
+      "": {
+        teddy: "#",
+        mdluli: "#",
+        frozen: "#",
+      },
+    };
+
+    return socialLinks[platform as keyof typeof socialLinks] || socialLinks[""];
+  };
+
   // Get platform-specific bonus entry options
   const getBonusEntryOptions = () => {
-    // Base options that are always available
+    const currentPlatform = formData.socialPlatform;
+    const partnerSocialLinks = getPartnerSocialLinks(currentPlatform);
+    const postLink = getCurrentPlatformPostLink();
+
+    // Base options that are always available - now with platform-specific links
     const baseOptions = [
       {
         name: "followedMdluli",
         label: "Follow Mdluli Safari Lodge",
         points: 1,
         action: "Follow",
-        link: partnerLinks.mdluli,
+        link: partnerSocialLinks.mdluli, // Platform-specific link
       },
       {
         name: "followedFrozen",
         label: "Follow Frozen For You",
         points: 1,
         action: "Follow",
-        link: partnerLinks.frozen,
+        link: partnerSocialLinks.frozen, // Platform-specific link
       },
     ];
 
     // Platform-specific options
-    if (formData.socialPlatform) {
-      // COMMENT: Update these links with the actual URLs for each platform
+    if (currentPlatform) {
+      // Use the same post link for both sharing and tagging
       const platformSpecificOptions = {
         facebook: [
           {
@@ -176,14 +227,14 @@ const GiveawayLandingPage: React.FC = () => {
             label: "Share Giveaway Post",
             points: 2,
             action: "Share",
-            link: "https://www.facebook.com/theteddybearclinic/posts/facebook-share-link", // Replace with actual Facebook share link
+            link: postLink, // Use the same post link
           },
           {
             name: "taggedFriends",
             label: "Tag 3 Friends in Comments",
             points: 2,
             action: "Comment",
-            link: "https://www.facebook.com/theteddybearclinic/posts/facebook-comment-link", // Replace with actual Facebook post link
+            link: postLink, // Use the same post link
           },
         ],
         instagram: [
@@ -192,14 +243,14 @@ const GiveawayLandingPage: React.FC = () => {
             label: "Repost in Your Story",
             points: 2,
             action: "Repost",
-            link: "https://www.instagram.com/p/instagram-story-link", // Replace with actual Instagram post link
+            link: postLink, // Use the same post link
           },
           {
             name: "taggedFriends",
             label: "Tag 3 Friends in Comments",
             points: 2,
             action: "Comment",
-            link: "https://www.instagram.com/p/instagram-comment-link", // Replace with actual Instagram post link
+            link: postLink, // Use the same post link
           },
         ],
         linkedin: [
@@ -208,14 +259,14 @@ const GiveawayLandingPage: React.FC = () => {
             label: "Share Giveaway Post",
             points: 2,
             action: "Share",
-            link: "https://www.linkedin.com/feed/update/linkedin-share-link", // Replace with actual LinkedIn share link
+            link: postLink, // Use the same post link
           },
           {
             name: "taggedFriends",
             label: "Tag 3 Connections in Comments",
             points: 2,
             action: "Comment",
-            link: "https://www.linkedin.com/feed/update/linkedin-comment-link", // Replace with actual LinkedIn post link
+            link: postLink, // Use the same post link
           },
         ],
       };
@@ -223,7 +274,7 @@ const GiveawayLandingPage: React.FC = () => {
       return [
         ...baseOptions,
         ...(platformSpecificOptions[
-          formData.socialPlatform as keyof typeof platformSpecificOptions
+          currentPlatform as keyof typeof platformSpecificOptions
         ] || []),
       ];
     }
@@ -231,25 +282,32 @@ const GiveawayLandingPage: React.FC = () => {
     return baseOptions;
   };
 
+  // Calculate bonus entries
+  const calculateBonusEntries = () => {
+    let bonusEntries = 0;
+    if (formData.followedMdluli) bonusEntries += 1;
+    if (formData.followedFrozen) bonusEntries += 1;
+    if (formData.repostedStory) bonusEntries += 2;
+    if (formData.taggedFriends) bonusEntries += 2;
+    return bonusEntries;
+  };
+
   return (
     <div className="giveaway-wrapper">
       <div className="giveaway-container">
-        {/* New Header */}
+        {/* Header */}
         <div className="page-header">
           <p></p>
         </div>
 
-        {/* Updated Header with new copy */}
-        <div className="giveaway-header">
-          <h1>Teddy Bear Foundation Giveaway</h1>
-          <div className="header-message">
-            <p>
-              Where giving back meets extraordinary rewards, your R50 entry
-              helps fund essential services that provide safety, healing, and
-              hope for children in need. Together, we can work towards a South
-              Africa free from child abuse.
-            </p>
-          </div>
+        {/* Header Image - Positioned to touch the header */}
+        <div className="giveaway-header-image-container">
+          <img
+            src="/images/assets/header.svg"
+            alt="Teddy Bear Foundation Giveaway Header"
+            className="giveaway-header-image"
+            style={{ width: "100%", display: "block" }}
+          />
         </div>
 
         {/* Logo Container with updated structure */}
@@ -300,10 +358,13 @@ const GiveawayLandingPage: React.FC = () => {
               Your entry has been successfully completed and payment received.
             </p>
             <p className="entries-confirmation">
-              You have secured{" "}
-              <span>{calculateEntries(formData.donationAmount)} entries</span>{" "}
-              into the giveaway.
+              You have secured <span>{totalEntries} entries</span> into the
+              giveaway.
             </p>
+            <div className="entries-breakdown">
+              <p>Base entries: {calculateEntries(formData.donationAmount)}</p>
+              <p>Bonus entries: {calculateBonusEntries()}</p>
+            </div>
             <p>We'll contact you if you're the lucky winner!</p>
             <div className="completion-actions">
               <Button
@@ -326,12 +387,15 @@ const GiveawayLandingPage: React.FC = () => {
                     please make your payment below.
                   </p>
                   <p className="entries-confirmation">
-                    You will receive{" "}
-                    <span>
-                      {calculateEntries(formData.donationAmount)} entries
-                    </span>{" "}
-                    after payment.
+                    You will receive <span>{totalEntries} entries</span> after
+                    payment.
                   </p>
+                  <div className="entries-breakdown">
+                    <p>
+                      Base entries: {calculateEntries(formData.donationAmount)}
+                    </p>
+                    <p>Bonus entries: {calculateBonusEntries()}</p>
+                  </div>
                 </div>
 
                 {/* Support & Entries section - Payment Step */}
@@ -344,8 +408,10 @@ const GiveawayLandingPage: React.FC = () => {
                       <strong>R{formData.donationAmount.toFixed(2)}</strong>{" "}
                       gives you{" "}
                       <strong>
-                        {calculateEntries(formData.donationAmount)} entries
+                        {calculateEntries(formData.donationAmount)} base entries
                       </strong>{" "}
+                      plus{" "}
+                      <strong>{calculateBonusEntries()} bonus entries</strong>{" "}
                       into the giveaway.
                     </p>
                   </div>
@@ -602,7 +668,15 @@ const GiveawayLandingPage: React.FC = () => {
                       </Button>
                     </div>
                     <div className="entries-display">
-                      {calculateEntries(formData.donationAmount)} Entries
+                      {calculateEntries(formData.donationAmount)} Base Entries
+                    </div>
+                    {calculateBonusEntries() > 0 && (
+                      <div className="bonus-entries-display">
+                        +{calculateBonusEntries()} Bonus Entries
+                      </div>
+                    )}
+                    <div className="total-entries-display">
+                      {totalEntries} Total Entries
                     </div>
                   </div>
                 </div>
@@ -664,9 +738,17 @@ const GiveawayLandingPage: React.FC = () => {
                   )}
                 </div>
 
-                {/* Terms Section */}
-                <div className="form-section terms-section">
-                  <div className="checkbox-group">
+                {/* Terms Section - Moved back to original position */}
+                <div
+                  className="form-section terms-section"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "60px",
+                  }}
+                >
+                  <div className="checkbox-group" style={{ margin: 0 }}>
                     <Checkbox
                       label="I accept the Competition Terms & Conditions"
                       name="acceptedTerms"
@@ -692,12 +774,51 @@ const GiveawayLandingPage: React.FC = () => {
                     {isSubmitting ? "Submitting..." : "Submit Entry"}
                   </Button>
                 </div>
+
+                {/* Footer Image - Positioned to touch the footer */}
+                <div
+                  className="footer-image-wrapper"
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#eee7e1",
+                    padding: 0,
+                    margin: 0,
+                    overflow: "hidden",
+                    lineHeight: 0,
+                    position: "relative",
+                  }}
+                >
+                  {/* Create a div with the same background color to fill any gaps */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundColor: "#eee7e1",
+                      zIndex: 0,
+                    }}
+                  />
+
+                  {/* Position the image on top */}
+                  <img
+                    src="/images/assets/footer.svg"
+                    alt="Teddy Bear Foundation Giveaway Footer"
+                    style={{
+                      width: "100%",
+                      display: "block",
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  />
+                </div>
               </>
             )}
           </form>
         )}
 
-        {/* New Footer */}
+        {/* Footer */}
         <div className="page-footer">
           <p>© 2025 Teddy Bear Foundation. All rights reserved.</p>
         </div>

@@ -59,7 +59,9 @@ body {
   color: var(--color-text);
   line-height: 1.5;
   overflow-x: hidden;
-  transform: scale(0.9); /* BACKGROUND ZOOM: Change this value to adjust zoom */
+  transform: scale(
+    0.95
+  ); /* BACKGROUND ZOOM: Adjusted for better view on desktop */
   transform-origin: center center;
 }
 
@@ -73,6 +75,9 @@ body {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   transition: transform 0.3s ease;
+  /* Ensure no internal padding affects the header/footer images */
+  padding: 0;
+  overflow: hidden;
 }
 
 /* Header styling */
@@ -139,6 +144,11 @@ body {
 /* Form styling */
 .giveaway-form {
   padding: var(--spacing-xl);
+  /* Remove padding at top and bottom to avoid white space */
+  padding-top: 0;
+  padding-bottom: 0;
+  /* Remove any potential margins */
+  margin: 0;
 }
 
 .form-section {
@@ -492,15 +502,38 @@ body {
   }
 }
 
-/* Terms section */
+/* Terms section - Moved to footer and centered */
 .terms-section {
   margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding: 0;
+  text-align: left;
+  /* Remove background color */
+  background-color: transparent;
+  color: var(--color-text);
 }
 
-.checkbox-group {
-  display: flex;
+.terms-section .checkbox-group {
+  justify-content: flex-start;
   align-items: flex-start;
-  gap: var(--spacing-sm);
+  margin: 0;
+}
+
+.terms-section .checkbox-label {
+  color: var(--color-text);
+}
+
+.terms-section .checkbox {
+  border-color: var(--color-border);
+}
+
+.terms-section .checkbox:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.terms-section .checkbox:checked::after {
+  color: white;
 }
 
 /* Submit section */
@@ -735,6 +768,7 @@ body {
   padding: var(--spacing-sm) 0;
   text-align: center;
   color: white;
+  margin: 0;
 }
 
 .page-footer {
@@ -744,6 +778,10 @@ body {
   text-align: center;
   color: white;
   font-size: var(--font-size-sm);
+  margin: 0;
+  /* Add padding for the T&Cs section */
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
 }
 
 /* Logo container styles */
@@ -1238,4 +1276,400 @@ button:disabled {
   .checkbox {
     margin-right: 12px;
   }
+}
+
+/* Header and Footer Images - Updated to match exact form width */
+.giveaway-header-image-container,
+.giveaway-footer-image-container {
+  width: 100%;
+  max-width: 800px; /* Match exact form width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  /* Ensure no white space at edges */
+  background-color: rgba(255, 255, 255, 0.98); /* Match form background */
+}
+
+.giveaway-header-image-container {
+  /* Remove border to ensure seamless connection with header */
+  border-bottom: none;
+  /* Position it to touch the header */
+  margin-top: 0;
+}
+
+.giveaway-footer-image-container {
+  /* Remove border to ensure seamless connection with footer */
+  border-top: none;
+  /* Position it to touch the footer */
+  margin-bottom: 0;
+  margin-top: 0; /* Remove spacing */
+}
+
+.giveaway-header-image,
+.giveaway-footer-image {
+  width: 100%;
+  max-width: 800px; /* Match exact form width */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  /* Ensure the image touches the edges */
+  object-fit: fill;
+}
+
+/* Mobile-specific styles for the images */
+@media (max-width: 768px) {
+  .giveaway-header-image,
+  .giveaway-footer-image {
+    /* Adjust max-width for mobile view */
+    max-width: 100%;
+  }
+
+  .giveaway-header-image-container,
+  .giveaway-footer-image-container {
+    /* Adjust max-width for mobile view */
+    max-width: 100%;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .giveaway-header-image,
+  .giveaway-footer-image {
+    /* Ensure images fill container on small screens */
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Header and Footer Images - Updated to match exact form width with no white background */
+.giveaway-header-image-container,
+.giveaway-footer-image-container {
+  width: 100%;
+  max-width: 800px; /* Match exact form width */
+  display: block; /* Changed from flex to block */
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  /* Remove any background color */
+  background-color: transparent;
+  /* Ensure images touch the edges */
+  line-height: 0; /* Remove any line-height gaps */
+  font-size: 0; /* Remove any font-size gaps */
+}
+
+.giveaway-header-image-container {
+  /* Position it to touch the header */
+  margin-top: 0;
+}
+
+.giveaway-footer-image-container {
+  /* Position it to touch the footer */
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.giveaway-header-image,
+.giveaway-footer-image {
+  width: 100%;
+  max-width: 800px; /* Match exact form width */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  /* Ensure the image fills the container completely */
+  object-fit: cover;
+}
+
+/* Terms section - Restored to original position */
+.terms-section {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding: 0;
+  text-align: left;
+  /* Remove background color */
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+.terms-section .checkbox-group {
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.terms-section .checkbox-label {
+  color: var(--color-text);
+}
+
+.terms-section .checkbox {
+  border-color: var(--color-border);
+}
+
+.terms-section .checkbox:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.terms-section .checkbox:checked::after {
+  color: white;
+}
+
+/* Update the header and footer image containers to eliminate white space */
+.giveaway-header-image-container,
+.giveaway-footer-image-container {
+  width: 100%;
+  max-width: 100%; /* Changed from 800px to 100% */
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  line-height: 0;
+  font-size: 0;
+  /* Remove any potential borders */
+  border: none;
+}
+
+.giveaway-header-image,
+.giveaway-footer-image {
+  width: 100%;
+  max-width: 100%; /* Changed from 800px to 100% */
+  height: auto;
+  display: block;
+  object-fit: cover;
+  /* Remove any potential margins */
+  margin: 0;
+}
+
+/* Ensure the form container has no padding that could create white space */
+.giveaway-form {
+  padding: var(--spacing-xl);
+  padding-top: 0;
+  padding-bottom: 0;
+  /* Remove any potential margins */
+  margin: 0;
+}
+
+/* Ensure the giveaway container has no internal padding */
+.giveaway-container {
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Update the footer image container to eliminate the remaining gap */
+.giveaway-footer-image-container {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  line-height: 0;
+  font-size: 0;
+  /* Remove any potential borders */
+  border: none;
+  /* Ensure full width */
+  box-sizing: border-box;
+}
+
+.giveaway-footer-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  margin: 0;
+  /* Ensure no scaling issues */
+  transform: scale(1.01); /* Slight scale to ensure no gaps at edges */
+}
+
+/* Center the terms and conditions section */
+.terms-section {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding: 0;
+  text-align: center; /* Center the text */
+  background-color: transparent;
+  color: var(--color-text);
+  display: flex;
+  justify-content: center; /* Center the content */
+  width: 100%;
+}
+
+.terms-section .checkbox-group {
+  justify-content: center; /* Center the checkbox */
+  align-items: center;
+  margin: 0;
+  display: flex;
+}
+
+/* Improve submit button spacing and centering */
+.submit-section {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl); /* Add bottom margin */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.submit-section button {
+  padding: var(--spacing-md) var(--spacing-2xl);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  border: none;
+  color: white;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px; /* Ensure minimum width */
+}
+
+/* Improve footer text styling */
+.page-footer {
+  width: 100%;
+  background-color: var(--color-footer);
+  padding: var(--spacing-lg) 0; /* Increased padding */
+  text-align: center;
+  color: white;
+  font-size: var(--font-size-sm);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-footer p {
+  margin: 0;
+  font-weight: 500; /* Make text slightly bolder */
+  letter-spacing: 0.5px; /* Add letter spacing for better readability */
+}
+
+/* Ensure footer image behaves exactly like header image */
+.giveaway-footer-image-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  overflow: hidden !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.giveaway-footer-image-container img {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: fill !important;
+  height: auto !important;
+}
+
+/* Ensure terms section is centered both horizontally and vertically */
+.terms-section {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: 60px !important;
+  margin-top: var(--spacing-xl) !important;
+  margin-bottom: var(--spacing-xl) !important;
+  text-align: center !important;
+}
+
+.terms-section .checkbox-group {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Set background color for footer image container to match image */
+.giveaway-footer-image-container {
+  background-color: #1d26d4 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Add these styles to the end of your giveaway.css file */
+
+/* Entry display styles */
+.bonus-entries-display {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-green-highlight);
+  background-color: rgba(var(--color-green-highlight-rgb), 0.1);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  margin-top: var(--spacing-sm);
+}
+
+.total-entries-display {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-accent);
+  background-color: rgba(var(--color-accent), 0.1);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  margin-top: var(--spacing-md);
+  border: 2px solid rgba(var(--color-accent), 0.2);
+}
+
+.entries-breakdown {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-md);
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.entries-breakdown p {
+  margin: var(--spacing-xs) 0;
+  font-size: var(--font-size-md);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bonus-entries-display,
+  .total-entries-display {
+    width: 100%;
+    text-align: center;
+  }
+
+  .entries-breakdown {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+  }
+
+  .entries-breakdown p {
+    margin: var(--spacing-xs) 0;
+  }
+}
+
+/* Form completion message entry breakdown */
+.form-completion-message .entries-breakdown {
+  margin: var(--spacing-md) auto;
+  max-width: 80%;
+  background-color: rgba(var(--color-primary-rgb), 0.05);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+}
+
+.form-completion-message .entries-breakdown p {
+  margin: var(--spacing-xs) 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
 }
