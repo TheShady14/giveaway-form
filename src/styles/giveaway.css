@@ -151,6 +151,29 @@ body {
   margin: 0;
 }
 
+/* Add these styles to the end of your giveaway.css file */
+
+/* New intro text styling - updated with no background and better typography */
+.intro-text {
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--color-text);
+  background: white; /* Remove gradient background */
+}
+
+.intro-text p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: #333;
+  font-family: var(--font-secondary);
+}
+
 .form-section {
   margin-bottom: var(--spacing-2xl);
   padding-bottom: var(--spacing-lg);
@@ -504,36 +527,35 @@ body {
 
 /* Terms section - Moved to footer and centered */
 .terms-section {
-  margin-top: var(--spacing-xl);
-  margin-bottom: var(--spacing-xl);
-  padding: 0;
-  text-align: left;
-  /* Remove background color */
-  background-color: transparent;
-  color: var(--color-text);
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  background-color: rgba(var(--color-primary-rgb), 0.03);
+  border-radius: var(--radius-md);
 }
 
 .terms-section .checkbox-group {
-  justify-content: flex-start;
-  align-items: flex-start;
-  margin: 0;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .terms-section .checkbox-label {
-  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-.terms-section .checkbox {
-  border-color: var(--color-border);
-}
-
-.terms-section .checkbox:checked {
-  background-color: var(--color-primary);
-  border-color: var(--color-primary);
-}
-
-.terms-section .checkbox:checked::after {
-  color: white;
+.terms-fine-print {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: 0.5rem;
+  text-align: center;
+  font-style: italic;
 }
 
 /* Submit section */
@@ -1735,5 +1757,101 @@ button:disabled {
 @media (max-width: 768px) {
   .entries-display-container {
     max-width: 100%;
+  }
+}
+
+/* Add these styles to the end of your giveaway.css file */
+
+/* New intro text styling - updated with no background and better typography */
+.intro-text {
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--color-text);
+  background: white; /* Remove gradient background */
+}
+
+.intro-text p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  color: #333;
+  font-family: var(--font-secondary);
+}
+
+/* Terms section with fine print */
+.terms-section {
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
+  background-color: rgba(var(--color-primary-rgb), 0.03);
+  border-radius: var(--radius-md);
+}
+
+.terms-section .checkbox-group {
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terms-section .checkbox-label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.terms-fine-print {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: 0.5rem;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Fix for footer image width issues - more aggressive approach */
+.footer-image-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  position: relative !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #eee7e1 !important;
+}
+
+.footer-image-wrapper img {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mobile responsiveness for intro text */
+@media (max-width: 768px) {
+  .intro-text {
+    padding: 1.5rem 1rem;
+  }
+
+  .intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .terms-section {
+    padding: var(--spacing-md);
+    min-height: 60px;
   }
 }

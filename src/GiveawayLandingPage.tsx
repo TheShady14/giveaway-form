@@ -24,6 +24,7 @@ import {
 const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
   initialStep = 1,
 }) => {
+  // State and other code remains the same...
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -60,6 +61,7 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
     setTotalEntries(entries);
   }, [formData]);
 
+  // Rest of your functions remain the same...
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -128,10 +130,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
     }
   };
 
-  // COMMENT: Social media platform links - Update these URLs with the actual Teddy Bear Foundation social media profiles
+  // Social media platform links and other functions remain the same...
   const openSocialLink = (platform: "facebook" | "instagram" | "linkedin") => {
     const links = {
-      // Updated with the correct links provided
       facebook: "https://www.facebook.com/theteddybearclinic",
       instagram: "https://www.instagram.com/teddybearfoundation/",
       linkedin: "https://www.linkedin.com/company/theteddybearclinic/",
@@ -139,16 +140,14 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
     window.open(links[platform], "_blank");
   };
 
-  // COMMENT: Post links - Update these URLs with the actual post links for each platform
   const getCurrentPlatformPostLink = () => {
-    // Updated with the correct post links provided
     const postLinks = {
       facebook: "https://www.facebook.com/share/p/18b2HxAmHW/",
       instagram:
         "https://www.instagram.com/p/DCrBijCsiai/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
       linkedin:
         "https://www.linkedin.com/posts/theteddybearclinic_the-teddy-bear-foundation-endorses-this-letter-activity-7313195154620706816-8_-4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE_PHBABfm9FconNbVv6IrCXpYuIvwoLJ38",
-      "": "#", // Default if no platform selected
+      "": "#",
     };
 
     return postLinks[formData.socialPlatform as keyof typeof postLinks] || "#";
@@ -160,16 +159,13 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
     linkedin: <FontAwesomeIcon icon={faLinkedin} color="#000000" />,
   };
 
-  // COMMENT: Partner website links - These are the main website links
   const partnerLinks = {
     frozen: "https://frozenforyou.co.za/",
     tbf: "https://teddybearfoundation.org.za/",
     mdluli: "https://www.mdlulisafarilodge.co.za/",
   };
 
-  // COMMENT: Partner social media links - These are the social media links for each partner
   const getPartnerSocialLinks = (platform: string) => {
-    // Updated with the correct social media links for each partner based on the selected platform
     const socialLinks = {
       facebook: {
         teddy: "https://www.facebook.com/theteddybearclinic",
@@ -196,33 +192,29 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
     return socialLinks[platform as keyof typeof socialLinks] || socialLinks[""];
   };
 
-  // Get platform-specific bonus entry options
   const getBonusEntryOptions = () => {
     const currentPlatform = formData.socialPlatform;
     const partnerSocialLinks = getPartnerSocialLinks(currentPlatform);
     const postLink = getCurrentPlatformPostLink();
 
-    // Base options that are always available - now with platform-specific links
     const baseOptions = [
       {
         name: "followedMdluli",
         label: "Follow Mdluli Safari Lodge",
         points: 1,
         action: "Follow",
-        link: partnerSocialLinks.mdluli, // Platform-specific link
+        link: partnerSocialLinks.mdluli,
       },
       {
         name: "followedFrozen",
         label: "Follow Frozen For You",
         points: 1,
         action: "Follow",
-        link: partnerSocialLinks.frozen, // Platform-specific link
+        link: partnerSocialLinks.frozen,
       },
     ];
 
-    // Platform-specific options
     if (currentPlatform) {
-      // Use the same post link for both sharing and tagging
       const platformSpecificOptions = {
         facebook: [
           {
@@ -230,14 +222,14 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
             label: "Share Giveaway Post",
             points: 2,
             action: "Share",
-            link: postLink, // Use the same post link
+            link: postLink,
           },
           {
             name: "taggedFriends",
             label: "Tag 3 Friends in Comments",
             points: 2,
             action: "Comment",
-            link: postLink, // Use the same post link
+            link: postLink,
           },
         ],
         instagram: [
@@ -246,14 +238,14 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
             label: "Repost in Your Story",
             points: 2,
             action: "Repost",
-            link: postLink, // Use the same post link
+            link: postLink,
           },
           {
             name: "taggedFriends",
             label: "Tag 3 Friends in Comments",
             points: 2,
             action: "Comment",
-            link: postLink, // Use the same post link
+            link: postLink,
           },
         ],
         linkedin: [
@@ -262,14 +254,14 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
             label: "Share Giveaway Post",
             points: 2,
             action: "Share",
-            link: postLink, // Use the same post link
+            link: postLink,
           },
           {
             name: "taggedFriends",
             label: "Tag 3 Connections in Comments",
             points: 2,
             action: "Comment",
-            link: postLink, // Use the same post link
+            link: postLink,
           },
         ],
       };
@@ -285,7 +277,6 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
     return baseOptions;
   };
 
-  // Calculate bonus entries
   const calculateBonusEntries = () => {
     let bonusEntries = 0;
     if (formData.followedMdluli) bonusEntries += 1;
@@ -672,7 +663,7 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                         size="sm"
                         onClick={() => handleDonationChange(-50)}
                         className="donation-btn"
-                        type="button" // Add this line to prevent form submission
+                        type="button"
                       >
                         -
                       </Button>
@@ -692,7 +683,7 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                         size="sm"
                         onClick={() => handleDonationChange(50)}
                         className="donation-btn"
-                        type="button" // Add this line to prevent form submission
+                        type="button"
                       >
                         +
                       </Button>
@@ -752,7 +743,7 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                             type="button"
                             className="bonus-action-button"
                             onClick={(e) => {
-                              e.stopPropagation(); // Prevent triggering the parent div's onClick
+                              e.stopPropagation();
                               window.open(option.link, "_blank");
                             }}
                           >
@@ -776,17 +767,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                   )}
                 </div>
 
-                {/* Terms Section - Moved back to original position */}
-                <div
-                  className="form-section terms-section"
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    minHeight: "60px",
-                  }}
-                >
-                  <div className="checkbox-group" style={{ margin: 0 }}>
+                {/* Terms Section - Improved spacing and added fine print */}
+                <div className="form-section terms-section">
+                  <div className="checkbox-group">
                     <Checkbox
                       label="I accept the Competition Terms & Conditions"
                       name="acceptedTerms"
@@ -794,6 +777,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                       onChange={handleChange}
                       required
                     />
+                  </div>
+                  <div className="terms-fine-print">
+                    Winners announced May 20th.
                   </div>
                 </div>
 
