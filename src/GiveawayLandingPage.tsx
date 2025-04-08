@@ -142,11 +142,11 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
 
   const getCurrentPlatformPostLink = () => {
     const postLinks = {
-      facebook: "https://www.facebook.com/share/p/18b2HxAmHW/",
+      facebook: "https://www.facebook.com/share/p/1AVbjFM133/",
       instagram:
-        "https://www.instagram.com/p/DCrBijCsiai/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        "https://www.instagram.com/p/DIL6BoGp8GH/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
       linkedin:
-        "https://www.linkedin.com/posts/theteddybearclinic_the-teddy-bear-foundation-endorses-this-letter-activity-7313195154620706816-8_-4?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE_PHBABfm9FconNbVv6IrCXpYuIvwoLJ38",
+        "https://www.linkedin.com/posts/theteddybearclinic_mdluli-safari-lodge-and-the-teddy-bear-foundation-activity-7315353837756694528-M6Fg?utm_source=share&utm_medium=member_desktop&rcm=ACoAAE_PHBABfm9FconNbVv6IrCXpYuIvwoLJ38",
       "": "#",
     };
 
