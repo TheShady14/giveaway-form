@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can keep some of your custom CSS variables here */
 :root {
   /* Colors */
   --color-primary: #3a86ff;

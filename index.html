@@ -2,9 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mdluli Giveaway</title>
+    <title>Teddy Bear Foundation Giveaway</title>
+
+    <!-- Preload critical logo images -->
+    <link rel="preload" href="/images/partners/tbf-logo.svg" as="image" />
+    <link rel="preload" href="/images/partners/mdluli.svg" as="image" />
+    <link
+      rel="preload"
+      href="/images/partners/frozenforyou-logo.svg"
+      as="image"
+    />
+
+    <!-- Gold trophy favicon (inline SVG) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a1 1 0 0 1 1 1v1h3a2 2 0 0 1 2 2v2c0 1.8-1.3 3.3-3 3.7V15a3 3 0 0 1-3 3h-2a3 3 0 0 1-3-3v-3.3c-1.7-.4-3-1.9-3-3.7V6a2 2 0 0 1 2-2h3V3a1 1 0 0 1 1-1zm1 5H8v2c0 1.1.9 2 2 2s2-.9 2-2V7z' fill='%23FFD700'/></svg>"
+    />
+
+    <!-- Inline critical CSS -->
+    <style>
+      /* Critical CSS for above-the-fold content */
+      .logo-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1rem;
+        background-color: white;
+      }
+      .logo {
+        height: 80px; /* Reduced initial size for faster loading */
+        width: auto;
+        object-fit: contain;
+        transition: height 0.3s ease;
+      }
+      @media (min-width: 768px) {
+        .logo {
+          height: 140px; /* Will transition to full size after load */
+        }
+      }
+    </style>
+
+    <!-- Meta tags for SEO and social sharing -->
+    <meta
+      name="description"
+      content="Enter the Teddy Bear Foundation Giveaway for a chance to win amazing prizes while supporting a great cause."
+    />
+    <meta property="og:title" content="Teddy Bear Foundation Giveaway" />
+    <meta
+      property="og:description"
+      content="Enter our giveaway for a chance to win amazing prizes while supporting the Teddy Bear Foundation."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-giveaway-url.com" />
+    <meta
+      property="og:image"
+      content="https://your-giveaway-url.com/images/social-share.jpg"
+    />
+    <meta name="theme-color" content="#f85baa" />
   </head>
   <body>
     <div id="root"></div>

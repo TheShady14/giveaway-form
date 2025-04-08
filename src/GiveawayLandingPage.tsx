@@ -5,13 +5,16 @@ import { useState, useEffect } from "react";
 import Button from "./components/ui/button";
 import Input from "./components/ui/input";
 import Checkbox from "./components/ui/checkbox";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  Facebook,
-  Instagram,
-  LinkedinIcon,
-  CheckCircle,
-  ExternalLink,
-} from "lucide-react";
+  faFacebook,
+  faInstagram,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faCheckCircle,
+  faExternalLinkAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import PayFastForm from "./components/PayFastForm";
 import {
   createEntry,
@@ -152,9 +155,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
   };
 
   const socialMediaIcons = {
-    facebook: <Facebook color="#000000" />,
-    instagram: <Instagram color="#000000" />,
-    linkedin: <LinkedinIcon color="#000000" />,
+    facebook: <FontAwesomeIcon icon={faFacebook} color="#000000" />,
+    instagram: <FontAwesomeIcon icon={faInstagram} color="#000000" />,
+    linkedin: <FontAwesomeIcon icon={faLinkedin} color="#000000" />,
   };
 
   // COMMENT: Partner website links - These are the main website links
@@ -322,6 +325,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
               src="/images/partners/mdluli.svg"
               alt="Mdluli Safari Lodge Logo"
               className="logo"
+              loading="eager"
+              width="140"
+              height="140"
             />
           </a>
           <a
@@ -334,6 +340,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
               src="/images/partners/tbf-logo.svg"
               alt="Teddy Bear Foundation Logo"
               className="logo"
+              loading="eager"
+              width="140"
+              height="140"
             />
           </a>
           <a
@@ -346,6 +355,9 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
               src="/images/partners/frozenforyou-logo.svg"
               alt="Frozen For You Logo"
               className="logo"
+              loading="eager"
+              width="140"
+              height="140"
             />
           </a>
         </div>
@@ -361,9 +373,19 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
               You have secured <span>{totalEntries} entries</span> into the
               giveaway.
             </p>
-            <div className="entries-breakdown">
-              <p>Base entries: {calculateEntries(formData.donationAmount)}</p>
-              <p>Bonus entries: {calculateBonusEntries()}</p>
+            <div className="entries-display-container">
+              <div className="total-entries-tab">
+                {totalEntries} Total Entries
+              </div>
+              <div className="entries-breakdown">
+                <div>
+                  Base entries:{" "}
+                  <span>{calculateEntries(formData.donationAmount)}</span>
+                </div>
+                <div>
+                  Bonus entries: <span>{calculateBonusEntries()}</span>
+                </div>
+              </div>
             </div>
             <p>We'll contact you if you're the lucky winner!</p>
             <div className="completion-actions">
@@ -390,11 +412,19 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                     You will receive <span>{totalEntries} entries</span> after
                     payment.
                   </p>
-                  <div className="entries-breakdown">
-                    <p>
-                      Base entries: {calculateEntries(formData.donationAmount)}
-                    </p>
-                    <p>Bonus entries: {calculateBonusEntries()}</p>
+                  <div className="entries-display-container">
+                    <div className="total-entries-tab">
+                      {totalEntries} Total Entries
+                    </div>
+                    <div className="entries-breakdown">
+                      <div>
+                        Base entries:{" "}
+                        <span>{calculateEntries(formData.donationAmount)}</span>
+                      </div>
+                      <div>
+                        Bonus entries: <span>{calculateBonusEntries()}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -534,7 +564,7 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                         >
                           {formData.followedTeddy ? (
                             <>
-                              <CheckCircle size={18} />
+                              <FontAwesomeIcon icon={faCheckCircle} size="sm" />
                               <span>Followed</span>
                             </>
                           ) : (
@@ -588,7 +618,7 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                         >
                           {formData.likedPost ? (
                             <>
-                              <CheckCircle size={18} />
+                              <FontAwesomeIcon icon={faCheckCircle} size="sm" />
                               <span>Liked</span>
                             </>
                           ) : (
@@ -667,16 +697,21 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                         +
                       </Button>
                     </div>
-                    <div className="entries-display">
-                      {calculateEntries(formData.donationAmount)} Base Entries
-                    </div>
-                    {calculateBonusEntries() > 0 && (
-                      <div className="bonus-entries-display">
-                        +{calculateBonusEntries()} Bonus Entries
+                    <div className="entries-display-container">
+                      <div className="total-entries-tab">
+                        {totalEntries} Total Entries
                       </div>
-                    )}
-                    <div className="total-entries-display">
-                      {totalEntries} Total Entries
+                      <div className="entries-breakdown">
+                        <div>
+                          Base entries:{" "}
+                          <span>
+                            {calculateEntries(formData.donationAmount)}
+                          </span>
+                        </div>
+                        <div>
+                          Bonus entries: <span>{calculateBonusEntries()}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -721,7 +756,10 @@ const GiveawayLandingPage: React.FC<{ initialStep?: number }> = ({
                               window.open(option.link, "_blank");
                             }}
                           >
-                            <ExternalLink size={16} />
+                            <FontAwesomeIcon
+                              icon={faExternalLinkAlt}
+                              size="sm"
+                            />
                             <span>{option.action}</span>
                           </button>
                         </div>

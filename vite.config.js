@@ -22,6 +22,21 @@ export default defineConfig({
   // Configure build output for Netlify
   build: {
     outDir: "dist",
-    sourcemap: true,
+    sourcemap: process.env.NODE_ENV !== "production",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom", "react-router-dom"],
+          ui: [
+            "lucide-react",
+            "@fortawesome/fontawesome-svg-core",
+            "@fortawesome/free-brands-svg-icons",
+            "@fortawesome/free-solid-svg-icons",
+          ],
+        },
+      },
+    },
+    // Vite 6 has built-in minification, so we don't need to specify terser options
+    minify: true,
   },
 });
